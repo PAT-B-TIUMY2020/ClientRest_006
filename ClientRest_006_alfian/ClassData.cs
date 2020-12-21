@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using System.Net;
+using static ClientRest_006_alfian.Program;
+
+namespace ClientRest_006_alfian
+{
+    class ClassData
+    {
+        public void getData()
+        {
+            var json = new WebClient().DownloadString("http://localhost:1907/Mahasiswa");
+            var data = JsonConvert.DeserializeObject<List<Mahasiswa>>(json);
+
+            foreach (var mhs in data)
+            {
+                Console.WriteLine("NIM: " + mhs.nama);
+                Console.WriteLine("Nama: " + mhs.nim);
+                Console.WriteLine("Prodi: " + mhs.prodi);
+                Console.WriteLine("Angkatan: " + mhs.angkatan);
+            }
+            Console.ReadLine();
+        }
+    }
+}
